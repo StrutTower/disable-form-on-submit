@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "name": "disable-form-on-submit",
+  "author": {
+    "name": "Alex Tiller",
+    "url": "https://github.com/StrutTower"
+  },
+  "description": "jQuery plugin that disables a form after a submit is attempted. Good for preventing double clicking causing double submits.",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "jquery": "~3.3.1"
+  },
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "uglify": "~0.1.5"
+  }
+}
