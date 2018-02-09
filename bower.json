@@ -1,0 +1,15 @@
+{
+  "name": "disable-form-on-submit",
+  "description": "jQuery plugin that disables a form after a submit is attempted. Good for preventing double clicking causing double submits.",
+  "private": true,
+  "main": [
+    "dist/disable-form-on-submit.min.js",
+    "src/disable-form-on-submit.js"
+  ],
+  "authors": [
+    "Strut Tower"
+  ],
+  "dependencies": {
+    "jquery": "~3.9.1"
+  }
+}
