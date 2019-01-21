@@ -3,7 +3,7 @@
         // Default settings
         var settings = $.extend({
             duration: 4000,
-            buttonTemplate: '<span class="fa fa-fw fa-spinner fa-spin"></span>',
+            buttonTemplate: 'Please Wait...',
             submitInputText: 'Please Wait...'
         }, options);
 

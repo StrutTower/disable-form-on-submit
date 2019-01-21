@@ -5,7 +5,7 @@
     <title>jQuery Disabled Form On Submit Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/3.3.92/css/materialdesignicons.min.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
@@ -71,10 +71,10 @@ $('form.disable-on-submit-custom-duration').disableOnSubmit({
             <div class="col-md-8">
                 <pre>
 $('form.disable-on-submit-custom-template').disableOnSubmit({
-    buttonTemplate: '&lt;strong&gt;Please wait to try to submit again.&lt;/strong&gt;',
+    buttonTemplate: '&lt;span class="mdi mdi-loading mdi-spin"&gt;&lt;\span&gt;',
     submitInputText: 'Please wait to try to submit again.'
 });
-                </pre>
+</pre>
             </div>
         </form>
 
@@ -99,11 +99,13 @@ $('form.disable-on-submit').disableOnSubmit();
         </form>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
     <script src="../src/disable-form-on-submit.js"></script>
     <script>
         $('form').on('submit', function (e) {
-            //Prevent any forms from disabling the
+            // Disable all form for demo
             e.preventDefault();
         });
 
@@ -114,7 +116,7 @@ $('form.disable-on-submit').disableOnSubmit();
         });
 
         $('form.disable-on-submit-custom-template').disableOnSubmit({
-            buttonTemplate: '<strong>Please wait to submit again.</strong>',
+            buttonTemplate: '<span class="mdi mdi-loading mdi-spin"><\span>',
             submitInputText: 'Please wait to submit again.'
         });
     </script>

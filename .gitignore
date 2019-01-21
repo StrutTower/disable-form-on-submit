@@ -1,4 +1,6 @@
 
+package-lock.json
+
 #ignore thumbnails created by windows
 Thumbs.db
 
