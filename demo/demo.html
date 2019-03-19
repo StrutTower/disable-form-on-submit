@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/3.3.92/css/materialdesignicons.min.css">
+    <style>
+        .mdi-lg {
+            font-size: 1.33333333em;
+            line-height: 0.75em;
+            vertical-align: -15%;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
@@ -14,8 +21,8 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="https://github.com/StrutTower/disable-form-on-submit" class="text-light">
-                        <span class="fa fa-2x fa-github"></span>
+                    <a href="https://github.com/StrutTower/disable-form-on-submit" class="nav-link">
+                        <span class="mdi mdi-lg mdi-github-circle"></span> View on GitHub
                     </a>
                 </li>
             </ul>
@@ -25,16 +32,17 @@
     <div class="container">
         <h4>Default Options</h4>
         <hr />
-        <form class="disable-on-submit row mb-4">
+        <form class="row mb-4" data-disable-on-submit>
             <div class="col-md-4">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit Button</button>
+                    <button type="submit" class="btn btn-primary mb-1">Submit Button</button>
+                    <br />
                     <input type="submit" class="btn btn-info" value="Submit Input" />
                 </div>
             </div>
             <div class="col-md-8">
                 <pre>
-$('form.disable-on-submit').disableOnSubmit();
+$('form[data-disable-on-submit]').disableOnSubmit();
                 </pre>
             </div>
         </form>
@@ -45,7 +53,8 @@ $('form.disable-on-submit').disableOnSubmit();
         <form class="disable-on-submit-custom-duration row mb-4">
             <div class="col-md-4">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit Button</button>
+                    <button type="submit" class="btn btn-primary mb-1">Submit Button</button>
+                    <br />
                     <input type="submit" class="btn btn-info" value="Submit Input" />
                 </div>
             </div>
@@ -80,18 +89,19 @@ $('form.disable-on-submit-custom-template').disableOnSubmit({
 
         <h4>Override Duration with Data- Attribute</h4>
         <hr />
-        <form class="disable-on-submit row mb-4" data-disable-on-submit="1000">
+        <form class="row mb-4" data-disable-on-submit="1000">
             <div class="col-md-4">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit Button</button>
+                    <button type="submit" class="btn btn-primary mb-1">Submit Button</button>
+                    <br />
                     <input type="submit" class="btn btn-info" value="Submit Input" />
                 </div>
             </div>
             <div class="col-md-8">
                 <pre>
-$('form.disable-on-submit').disableOnSubmit();
+$('form[data-disable-on-submit]').disableOnSubmit();
 
-&lt;form class="disable-on-submit row mb-4" data-disable-on-submit="1000"&gt;
+&lt;form class="row mb-4" data-disable-on-submit="1000"&gt;
     ...
 &lt;/form&gt;
                 </pre>
@@ -105,11 +115,11 @@ $('form.disable-on-submit').disableOnSubmit();
     <script src="../src/disable-form-on-submit.js"></script>
     <script>
         $('form').on('submit', function (e) {
-            // Disable all form for demo
+            // Disable all forms for the demo
             e.preventDefault();
         });
 
-        $('form.disable-on-submit').disableOnSubmit();
+        $('form[data-disable-on-submit]').disableOnSubmit();
 
         $('form.disable-on-submit-custom-duration').disableOnSubmit({
             duration: 1000

@@ -28,7 +28,7 @@ $('form-selector').disableOnSubmit({
 | Option | Description |
 |:------:|-------------|
 | duration | Time that the form is disabled in milliseconds. Default: 4000 |
-| buttonTemplate | HTML that will replace the content of any submit buttons while the form is disabled. false will disable the replacement. Default: `'<span class="fa fa-fw fa-spinner fa-spin"></span>'` |
+| buttonTemplate | HTML that will replace the content of any submit buttons while the form is disabled. false will disable the replacement. Default: `'Please Wait...'` |
 | submitInputText | Text that will replace the value of any submit inputs while the form is disabled. false will disable the replacement. Default: `'Please Wait...'`
 
 ##### Override the duration on a specific form
@@ -38,4 +38,10 @@ If your are using a selector that selects multiple forms the duration can be ove
 
 ```html
 <form action="" method="" data-disable-on-submit="2000">
+```
+
+
+##### Disable on a specific form using data attributes
+```html
+<form action="" method="" data-disable-on-submit="false">
 ```

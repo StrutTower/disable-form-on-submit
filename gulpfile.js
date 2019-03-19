@@ -1,13 +1,13 @@
 ﻿var gulp = require('gulp'),
-    uglify = require('gulp-uglify'),
+    terser = require('gulp-terser'),
     rename = require('gulp-rename');
 
 
 gulp.task('minify-js', function () {
     return gulp.src('src/disable-form-on-submit.js')
-        .pipe(uglify())
+        .pipe(terser())
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', gulp.parallel('minify-js'));
+gulp.task('default', gulp.series('minify-js'));
