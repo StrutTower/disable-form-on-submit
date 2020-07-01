@@ -3,7 +3,7 @@
 jQuery plug-in that can disable a from for a specific amount of time after a submit is attempted.
 Great for preventing users from double clicking on the submit button and submitting the form twice.
 
-[Live Demo](http://htmlpreview.github.io/?https://github.com/StrutTower/disable-form-on-submit/blob/master/demo/demo.html)
+[Live Demo](https://struttower.github.io/disable-form-on-submit/demo/demo.html)
 
 ### Usage
 
