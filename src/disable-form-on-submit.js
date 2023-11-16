@@ -1,74 +1,88 @@
-(function ($) {
-    $.fn.disableOnSubmit = function (options) {
-        // Default settings
-        var settings = $.extend({
+(function () {
+    this.disableFormOnSubmit = function (form, options) {
+        let defaults = {
             duration: 4000,
             buttonTemplate: 'Please Wait...',
             submitInputText: 'Please Wait...'
-        }, options);
+        };
 
-        function formSubmitted(e) {
-            var form = $(this);
-            var attributeValue = $(this).data('disable-on-submit');
+        this.element = form;
+        this.settings = (options && typeof options === 'object') ? extendDefaults(defaults, options) : defaults;
 
-            if (attributeValue === false) {
-                // Disable this script if the data-disable-on-submit attribute is false
-                return;
-            } else if (form.data('submitted') === true) {
-                // Prevent submitting the form again if it was submitted recently
-                e.preventDefault();
-                return;
-            } else {
-                form.data('submitted', true);
-
-                // Disable all submit buttons
-                var elements = $('button:submit', this);
-                elements.each(function () {
-                    $(this).attr('disabled', 'disabled');
-                    if (settings.buttonTemplate !== false) {
-                        $(this).data('temp-value', $(this).html());
-                        $(this).html(settings.buttonTemplate);
-                    }
-                });
-
-                // Disable all submit inputs
-                var inputs = $('input[type=submit]', this);
-                inputs.each(function () {
-                    $(this).attr('disabled', 'disabled');
-                    if (settings.submitInputText !== false) {
-                        $(this).data('temp-text', $(this).val());
-                        $(this).val(settings.submitInputText);
-                    }
-                });
-
-                var duration = settings.duration;
-                if (attributeValue) {
-                    var customDuration = parseInt(attributeValue);
-                    if (customDuration > 0) duration = customDuration;
-                }
-
-                // Enable everything after the timeout
-                setTimeout(function () {
-                    form.data('submitted', false);
-                    elements.each(function () {
-                        $(this).removeAttr('disabled');
-                        if (settings.buttonTemplate !== false) {
-                            $(this).html($(this).data('temp-value'));
-                        }
-                    });
-                    inputs.each(function () {
-                        $(this).removeAttr('disabled');
-                        if (settings.submitInputText !== false) {
-                            $(this).val($(this).data('temp-text'));
-                        }
-                    })
-                }, duration);
-            }
+        this.init = function () {
+            this.element.addEventListener('submit', submit);
+            this.element.settings = this.settings;
         }
 
-        this.filter('form').each(function () {
-            var form = $(this);
-            form.on('submit', formSubmitted);
-        });
+        function submit(e) {
+            let settings = e.currentTarget.settings;
+            let attrValue = form.dataset.disableDuration;
+
+            if (attrValue === 'false') {
+                // Disable this script if the data-disable-duration attribute is false
+                return;
+            } else if (form.dataset.submitted === 'true') {
+                e.preventDefault();
+                return;
+            }
+
+            form.dataset.submitted = true;
+            let buttons = form.querySelectorAll('button[type="submit"]');
+            let inputs = form.querySelectorAll('input[type="submit"]');
+
+            // Disable buttons
+            buttons.forEach(function (button) {
+                button.disabled = true;
+                if (settings.buttonTemplate) {
+                    button.dataset.tempValue = button.innerHTML;
+                    button.innerHTML = settings.buttonTemplate;
+                }
+            });
+
+            // Disable inputs
+            inputs.forEach(function (input) {
+                input.disabled = true;
+                if (settings.submitInputText) {
+                    input.dataset.tempValue = input.value;
+                    input.value = settings.submitInputText;
+                }
+            });
+
+            // Get the attribute duration if it exists
+            let duration = settings.duration;
+            if (attrValue) {
+                let attrDuration = parseInt(attrValue);
+                if (attrDuration > 0) duration = attrDuration;
+            }
+
+            setTimeout(function () {
+                form.dataset.submitted = false;
+
+                buttons.forEach(function (button) {
+                    button.disabled = false;
+                    if (settings.buttonTemplate) {
+                        button.innerHTML = button.dataset.tempValue;
+                    }
+                });
+
+                inputs.forEach(function (input) {
+                    input.disabled = false;
+                    if (settings.submitInputText) {
+                        input.value = input.dataset.tempValue;
+                    }
+                });
+            }, duration);
+        }
+
+        function extendDefaults(defaults, properties) {
+            Object.keys(properties).forEach(property => {
+                if (properties.hasOwnProperty(property)) {
+                    defaults[property] = properties[property];
+                }
+            });
+            return defaults;
+        }
+
+        this.init();
     }
-}(jQuery));
+}());

@@ -1,28 +1,30 @@
-# jQuery Disable Form on Submit
+# Disable Form on Submit
 
-jQuery plug-in that can disable a from for a specific amount of time after a submit is attempted.
+JavaScript plug-in that can disable a from for a specific amount of time after a submit is attempted.
 Great for preventing users from double clicking on the submit button and submitting the form twice.
 
 [Live Demo](https://struttower.github.io/disable-form-on-submit/demo/demo.html)
 
-### Usage
+## Usage
 
 Basic usage with default options:
 ```javascript
-$('form-selector').disableOnSubmit();
+new disableFormOnSubmit(formElement);
 ```
 
 
 
 With Options:
 ```javascript
-$('form-selector').disableOnSubmit({
-    option: value
+new disableFormOnSubmit(formElement, {
+	duration: 4000,
+    buttonTemplate: 'Please Wait...',
+    submitInputText: 'Please Wait...'
 });
 ```
 
 
-### Options
+## Options
 
 
 | Option | Description |
@@ -31,17 +33,17 @@ $('form-selector').disableOnSubmit({
 | buttonTemplate | HTML that will replace the content of any submit buttons while the form is disabled. false will disable the replacement. Default: `'Please Wait...'` |
 | submitInputText | Text that will replace the value of any submit inputs while the form is disabled. false will disable the replacement. Default: `'Please Wait...'`
 
-##### Override the duration on a specific form
+### Override the duration on a specific form
 
 If your are using a selector that selects multiple forms the duration can be overriden on a specific form by adding a 
-`data-disable-on-submit` attribute to the form:
+`data-disable-duration` attribute to the form:
 
 ```html
-<form action="" method="" data-disable-on-submit="2000">
+<form action="" method="" data-disable-duration="2000">
 ```
 
 
-##### Disable on a specific form using data attributes
+### Disable on a specific form using data attributes
 ```html
-<form action="" method="" data-disable-on-submit="false">
+<form action="" method="" data-disable-duration="false">
 ```

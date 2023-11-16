@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8" />
-    <title>jQuery Disabled Form On Submit Demo</title>
+    <title>Disabled Form On Submit Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/3.3.92/css/materialdesignicons.min.css">
     <style>
         .mdi-lg {
@@ -12,10 +12,21 @@
             line-height: 0.75em;
             vertical-align: -15%;
         }
+
+        .toast-item {
+            background: rgb(29,71,73);
+            background: linear-gradient(336deg, rgba(29,71,73,1) 0%, rgba(31,96,99,1) 100%);
+            margin: 0.3rem auto;
+            padding: 0.5rem;
+            text-align: center;
+            width: 200px;
+            border-radius: 0.3rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+    <nav class="navbar navbar-expand-lg navbar-dark mb-3" style="background-color: #1f6063;">
         <div class="container">
             <a class="navbar-brand" href="#">jQuery Disable Form On Submit</a>
 
@@ -30,19 +41,34 @@
     </nav>
 
     <div class="container">
+
+        <p>
+            The main purpose of this plugin is to prevent a user from submitted a form multiple times if they double click the submit button.
+        </p>
+        <p>
+            When a form is submitted that has been initalized with this plugin, all buttons and inputs with type submit will be disabled.
+            Other ways of submitting the form such as hitting enter in a text field are also blocked.
+            After the duration, default is 4000 milliseconds, the form is reactivated.
+        </p>
+        <p>
+            The following demo forms are set to preventDefault for the purposes of this demo.
+        </p>
+
         <h4>Default Options</h4>
         <hr />
-        <form class="row mb-4" data-disable-on-submit>
+        <form class="row mb-4 default-options-form">
             <div class="col-md-4">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mb-1">Submit Button</button>
                     <br />
-                    <input type="submit" class="btn btn-info" value="Submit Input" />
+                    <input type="submit" class="btn btn-success" value="Submit Input" />
                 </div>
             </div>
             <div class="col-md-8">
                 <pre>
-$('form[data-disable-on-submit]').disableOnSubmit();
+document.querySelectorAll('.default-options-form').forEach(function (element) {
+    new disableFormOnSubmit(element);
+});
                 </pre>
             </div>
         </form>
@@ -50,18 +76,20 @@ $('form[data-disable-on-submit]').disableOnSubmit();
 
         <h4>Changing Duration</h4>
         <hr />
-        <form class="disable-on-submit-custom-duration row mb-4">
+        <form class="row mb-4" id="demo-form-duration">
             <div class="col-md-4">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mb-1">Submit Button</button>
                     <br />
-                    <input type="submit" class="btn btn-info" value="Submit Input" />
+                    <input type="submit" class="btn btn-success" value="Submit Input" />
                 </div>
             </div>
             <div class="col-md-8">
                 <pre>
-$('form.disable-on-submit-custom-duration').disableOnSubmit({
-    duration: 1000
+document.querySelectorAll('#demo-form-duration').forEach(function (element) {
+    new disableFormOnSubmit(element, {
+        duration: 1000
+    });
 });
                 </pre>
             </div>
@@ -69,39 +97,80 @@ $('form.disable-on-submit-custom-duration').disableOnSubmit({
 
         <h4>Changing button template</h4>
         <hr />
-        <form class="disable-on-submit-custom-template row mb-4">
+        <form class="row mb-4" id="demo-form-templates">
             <div class="col-md-4">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mb-1">Submit Button</button>
                     <br />
-                    <input type="submit" class="btn btn-info" value="Submit Input" />
+                    <input type="submit" class="btn btn-success" value="Submit Input" />
                 </div>
             </div>
             <div class="col-md-8">
                 <pre>
-$('form.disable-on-submit-custom-template').disableOnSubmit({
-    buttonTemplate: '&lt;span class="mdi mdi-loading mdi-spin"&gt;&lt;\span&gt;',
-    submitInputText: 'Please wait to try to submit again.'
+document.querySelectorAll('#demo-form-templates').forEach(function (element) {
+    new disableFormOnSubmit(element, {
+        buttonTemplate: '&lt;span class="mdi mdi-loading mdi-spin"&gt;&lt;\span&gt;',
+        submitInputText: 'Please wait to submit again.'
+    });
 });
 </pre>
             </div>
         </form>
 
-        <h4>Override Duration with Data- Attribute</h4>
+        <h4>Disable Replacing Text</h4>
         <hr />
-        <form class="row mb-4" data-disable-on-submit="1000">
+        <form class="row mb-4" id="demo-form-disable-templates">
             <div class="col-md-4">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary mb-1">Submit Button</button>
                     <br />
-                    <input type="submit" class="btn btn-info" value="Submit Input" />
+                    <input type="submit" class="btn btn-success" value="Submit Input" />
                 </div>
             </div>
             <div class="col-md-8">
                 <pre>
-$('form[data-disable-on-submit]').disableOnSubmit();
+document.querySelectorAll('#demo-form-disable-templates').forEach(function (element) {
+    new disableFormOnSubmit(element, {
+        buttonTemplate: false,
+        submitInputText: false
+    });
+});
+</pre>
+            </div>
+        </form>
 
-&lt;form class="row mb-4" data-disable-on-submit="1000"&gt;
+        <h4>Override Duration with data- Attribute</h4>
+        <hr />
+        <form class="row mb-4 default-options-form" data-disable-duration="1000">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mb-1">Submit Button</button>
+                    <br />
+                    <input type="submit" class="btn btn-success" value="Submit Input" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <pre>
+&lt;form class="row mb-4" data-disable-duration="1000"&gt;
+    ...
+&lt;/form&gt;
+                </pre>
+            </div>
+        </form>
+
+        <h4>Turn Off Disable with data- Attribute</h4>
+        <hr />
+        <form class="row mb-4 default-options-form" data-disable-duration="false">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mb-1">Submit Button</button>
+                    <br />
+                    <input type="submit" class="btn btn-success" value="Submit Input" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <pre>
+&lt;form class="row mb-4" data-disable-duration="false"&gt;
     ...
 &lt;/form&gt;
                 </pre>
@@ -109,25 +178,51 @@ $('form[data-disable-on-submit]').disableOnSubmit();
         </form>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
+    <div id="toast-container" style="position:fixed;bottom:5px;left:0;right:0;pointer-events:none;user-select:none;"></div>
+
     <script src="../src/disable-form-on-submit.js"></script>
     <script>
-        $('form').on('submit', function (e) {
-            // Disable all forms for the demo
-            e.preventDefault();
+        // Disable all form submittions for the demo
+        document.querySelectorAll('form').forEach(function (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                let container = document.getElementById('toast-container');
+
+                let toast = document.createElement('div');
+                toast.innerText = 'Form Submitted';
+                toast.classList.add('toast-item');
+
+                container.appendChild(toast);
+
+                setTimeout(function () {
+                    toast.remove();
+                }, 2000);
+            });
         });
 
-        $('form[data-disable-on-submit]').disableOnSubmit();
-
-        $('form.disable-on-submit-custom-duration').disableOnSubmit({
-            duration: 1000
+        document.querySelectorAll('.default-options-form').forEach(function (element) {
+            new disableFormOnSubmit(element);
         });
 
-        $('form.disable-on-submit-custom-template').disableOnSubmit({
-            buttonTemplate: '<span class="mdi mdi-loading mdi-spin"><\span>',
-            submitInputText: 'Please wait to submit again.'
+        document.querySelectorAll('#demo-form-duration').forEach(function (element) {
+            new disableFormOnSubmit(element, {
+                duration: 1000
+            });
+        });
+
+        document.querySelectorAll('#demo-form-templates').forEach(function (element) {
+            new disableFormOnSubmit(element, {
+                buttonTemplate: '<span class="mdi mdi-loading mdi-spin"><\span>',
+                submitInputText: 'Please wait to submit again.'
+            });
+        });
+
+        document.querySelectorAll('#demo-form-disable-templates').forEach(function (element) {
+            new disableFormOnSubmit(element, {
+                buttonTemplate: false,
+                submitInputText: false
+            });
         });
     </script>
 </body>
