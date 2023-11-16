@@ -17,7 +17,7 @@ new disableFormOnSubmit(formElement);
 With Options:
 ```javascript
 new disableFormOnSubmit(formElement, {
-	duration: 4000,
+    duration: 4000,
     buttonTemplate: 'Please Wait...',
     submitInputText: 'Please Wait...'
 });
